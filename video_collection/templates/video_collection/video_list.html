@@ -13,16 +13,20 @@
 
 <a href="{% url 'video_list' %}">
     <button>Clear Search</button>
-</a><h3>{{ videos|length }} video{{videos|pluralize}}</h3>
+</a>
+
+<h3>{{ videos|length }} video{{ videos|length|pluralize}}</h3>
 
 {% for video in videos %}
 
-    <div>
-        <h3>{{ video.name }}</h3>
-        <p>{{ video.notes }}</p>
-        <iframe width="420" height="315" src="https://youtube.com/embed/{{video.video_id}}"></iframe>
-        <p><a href="{{ video.url }}">{{ video.url }}</a></p>
-    </div>
+<div>
+    <h3>{{ video.name }}</h3>
+    <p>{{ video.notes }}</p>
+    <iframe width="420" height="315" src="https://youtube.com/embed/{{video.video_id}}"></iframe>
+    <p>
+        <a href="{{ video.url }}">{{ video.url }}</a>
+    </p>
+</div>
 
 {% empty %}
 

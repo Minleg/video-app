@@ -11,10 +11,20 @@ class Video(models.Model):
     def save(self, *args, **kwargs): # override save method - run codes that we want to run before data is saved to the database
         
         # extract the video id from a youtube url
-        if not self.url.startswith('https://www.youtube.com/watch'):
-            raise ValidationError(f'Invalid Youtube URL {self.url}')
+        # if not self.url.startswith('https://www.youtube.com/watch'):
+        #     raise ValidationError(f'Invalid Youtube URL {self.url}')
         
         url_components = parse.urlparse(self.url)
+        
+        if url_components.scheme != 'https':
+            raise ValidationError(f'Invalid Youtube URL {self.url}')
+        
+        if url_components.netloc != 'www.youtube.com':
+            raise ValidationError(f'Invalid Youtube URL {self.url}')
+        
+        if url_components.path != '/watch':
+            raise ValidationError(f'Invalid Youtube URL {self.url}')
+        
         query_string = url_components.query
         if not query_string:
             raise ValidationError(f'Invalid Youtube URL {self.url}')

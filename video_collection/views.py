@@ -41,7 +41,7 @@ def video_list(request):
         
     else: # form is not filled in or this is the first time the user sees the page
         search_form = SearchForm()
-        videos = Video.objects.order_by(Lower('name'))
+        videos = Video.objects.order_by(Lower('name')) # gets all videos from database
         
-    videos = Video.objects.all() # gets all videos from database
+    #videos = Video.objects.all() # gets all videos from database
     return render(request, 'video_collection/video_list.html', {'videos': videos, 'search_form': search_form})
