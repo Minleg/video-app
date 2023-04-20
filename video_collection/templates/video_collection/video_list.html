@@ -26,6 +26,10 @@
     <p>
         <a href="{{ video.url }}">{{ video.url }}</a>
     </p>
+    <p>
+        <a href="{% url 'video_detail' video.pk %}">Details</a>
+    </p>
+
 </div>
 
 {% empty %}
