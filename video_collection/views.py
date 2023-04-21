@@ -58,15 +58,9 @@ def video_delete(request, video_pk):
     video = get_object_or_404(Video, pk=video_pk)
     
     if request.method == 'POST':
-        # if request.POST.get('confirm') == 'yes': # asking user confirmation to delete the video
-        #     video.delete()
-        #     messages.success(request, 'Video deleted')
-        #     return redirect('video_list') # redirects to video list
-        # else: # if users cancels deletion, redirect to the video detail page
-            # return redirect('video_detail', video_pk=video.pk)
-        return redirect('video_confirmation', video.pk)
-    else:
-        return render(request, 'video_collection/video_delete_confirmation.html', {'video': video})
+        return redirect('video_confirmation', video.pk) # shows the confirmation page
+    else: 
+        return render(request, 'video_collection/video_delail.html', {'video': video}) # if request is not post, stays on the video detail page
     
 
 def video_confirmation(request, video_pk):
@@ -74,7 +68,7 @@ def video_confirmation(request, video_pk):
     if request.method == 'POST':
         if request.POST.get('confirm') == 'yes': # asking user confirmation to delete the video
             video.delete()
-            messages.success(request, 'Video deleted')
+            # messages.success(request, 'Video deleted')
             return redirect('video_list')
         else:
             return redirect('video_detail', video_pk=video_pk)
