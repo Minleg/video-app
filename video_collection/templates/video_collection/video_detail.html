@@ -12,4 +12,9 @@
 
 <p>URL: <a href=" {{ video.url }}">{{ video.url }} </a></p>
 
+<form method="POST" action="{% url 'video_delete' video.pk %}">
+    {% csrf_token %}
+    <button type="submit">Delete</button>
+</form>
+
 {% endblock %}
